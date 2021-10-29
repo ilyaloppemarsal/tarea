@@ -43,15 +43,16 @@ node {
             print currentBuild.projectName
             print currentBuild.previousBuild
 
-             if(currentBuild.rawBuild.getCause(hudson.model.Cause$UserIdCause)!=null){
+            if(currentBuild.rawBuild.getCause(hudson.model.Cause$UserIdCause)!=null){
                 echo "Esto solo se ejecuta si la causa es un lanzamiento manual"
             }
-            if(currentBuild.rawBuild.getCause(hudson.trigger.TimerTrigger$TimerTriggerCause)!=null){
+            if(currentBuild.rawBuild.getCause(hudson.triggers.TimerTrigger$TimerTriggerCause)!=null){
                 echo "Esto solo se ejecuta si la causa es un lanzamiento basado en cron"
             }
-            if(currentBuild.rawBuild.getCause(hudson.trigger.SCMTrigger$SCMTriggerCause)!=null){
+            if(currentBuild.rawBuild.getCause(hudson.triggers.SCMTrigger$SCMTriggerCause)!=null){
                 echo "Esto solo se ejecuta si la causa es un lanzamiento debido a cambio en el repo"
             }
+            
         }
         
         
