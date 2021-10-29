@@ -95,22 +95,4 @@ def creoConfiguracion(){
 
 
 
-
-
-
-
-
-// Función que crea la configuración. NO TOCAR si no sabes lo que estás haciendo ;)
-def creoConfiguracion(){
-    properties(
-        [
-            parameters(
-                [
-                    choice(name: 'VERSION_DEL_PIPELINE', description: 'Version del pipeline instalada', choices: [ VERSION_DEL_PIPELINE ])
-                ] + PARAMETROS_DE_MI_PIPELINE
-            ),
-            pipelineTriggers( TRIGGERS_DE_MI_PIPELINE )
-        ]
-    )
-}
  
