@@ -1,5 +1,3 @@
-129 lines (107 sloc)  4.86 KB
-   
 // Plantilla de PIPELINE.
 // Autor: IvanciniGT
 
