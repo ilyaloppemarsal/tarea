@@ -63,7 +63,7 @@ node {
                         wait: false, 
                         job: 'Tarea', 
                         parameters: [
-                            booleanParam(name: 'GENERAR_ERROR', value: false), 
+                            booleanParam(name: 'GENERAR_ERROR', value: true), 
                             string(name: 'DEMORA', value: '3'), 
                             string(name: 'CONTENIDO', value: 'Contenido por defecto'), 
                             string(name: 'FICHERO', value: 'fichero3')
@@ -76,7 +76,7 @@ node {
                             wait: false, 
                             job: 'Tarea', 
                             parameters: [
-                                booleanParam(name: 'GENERAR_ERROR', value: false), 
+                                booleanParam(name: 'GENERAR_ERROR', value: true), 
                                 string(name: 'DEMORA', value: '4'), 
                                 string(name: 'CONTENIDO', value: 'Contenido por defecto'), 
                                 string(name: 'FICHERO', value: 'fichero4')
