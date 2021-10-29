@@ -6,10 +6,10 @@ VERSION_DEL_PIPELINE="0"
 
 // Añadir aquí los parámetros del pipeline
 PARAMETROS_DE_MI_PIPELINE=[
-    booleanParam (defaultValue: true, description: 'Indica si se genera un error', name: 'GENERAR_ERROR'),
-    string(defaultValue: '5', description: 'Tiempo que simulamos que tarda la tarea', name: 'DEMORA'),
+    booleanParam (defaultValue: false, description: 'Indica si se genera un error', name: 'GENERAR_ERROR'),
+    string(defaultValue: '3', description: 'Tiempo que simulamos que tarda la tarea', name: 'DEMORA'),
     string(defaultValue: 'Contenido por defecto', description: 'Contenido del fichero que generamos', name: 'CONTENIDO'),
-    string(defaultValue: '', description: 'Fichero que generamos', name: 'FICHERO'),
+    string(defaultValue: 'fic.txt', description: 'Fichero que generamos', name: 'FICHERO'),
     // choice(choices: ['Valor1', 'Valor2', 'Valor3'], description: 'Descripción de mi parámetro', name: 'MI_PARAM_LISTA')
 ]
 
