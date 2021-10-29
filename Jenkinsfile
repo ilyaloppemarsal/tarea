@@ -54,7 +54,7 @@ node {
             sh "echo '${CONTENIDO}' > ${FICHERO}"
         }
         stage ("Guardar fichero") {
-            archiveArtifacts(artifacts: '${FICHERO}', followSymlinks: false)
+            archiveArtifacts(artifacts: "${FICHERO}", followSymlinks: false)
             echo 'Fichero guardado'
         }
     }
@@ -65,6 +65,30 @@ node {
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+// Función que crea la configuración. NO TOCAR si no sabes lo que estás haciendo ;)
+def creoConfiguracion(){
+    properties(
+        [
+            parameters(
+                [
+                    choice(name: 'VERSION_DEL_PIPELINE', description: 'Version del pipeline instalada', choices: [ VERSION_DEL_PIPELINE ])
+                ] + PARAMETROS_DE_MI_PIPELINE
+            ),
+            pipelineTriggers( TRIGGERS_DE_MI_PIPELINE )
+        ]
+    )
+}
 
 
 
