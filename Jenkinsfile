@@ -1,3 +1,5 @@
+129 lines (107 sloc)  4.86 KB
+   
 // Plantilla de PIPELINE.
 // Autor: IvanciniGT
 
@@ -6,10 +8,10 @@ VERSION_DEL_PIPELINE="0"
 
 // Añadir aquí los parámetros del pipeline
 PARAMETROS_DE_MI_PIPELINE=[
-    booleanParam (defaultValue: false, description: 'Indica si se genera un error', name: 'GENERAR_ERROR'),
-    string(defaultValue: '3', description: 'Tiempo que simulamos que tarda la tarea', name: 'DEMORA'),
+    booleanParam (defaultValue: true, description: 'Indica si se genera un error', name: 'GENERAR_ERROR'),
+    string(defaultValue: '2', description: 'Tiempo que simulamos que tarda la tarea', name: 'DEMORA'),
     string(defaultValue: 'Contenido por defecto', description: 'Contenido del fichero que generamos', name: 'CONTENIDO'),
-    string(defaultValue: 'fic.txt', description: 'Fichero que generamos', name: 'FICHERO'),
+    string(defaultValue: 'fict.txt', description: 'Fichero que generamos', name: 'FICHERO'),
     // choice(choices: ['Valor1', 'Valor2', 'Valor3'], description: 'Descripción de mi parámetro', name: 'MI_PARAM_LISTA')
 ]
 
@@ -34,15 +36,14 @@ node {
         // checkout scm     // En este caso se hace un checkout del mismo repo donde está el JENKINSFILE
         // checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'MiCredencialGitHub', url: 'https://github.com/IvanciniGT/cursoJenkinsWebapp.git']]])
     try{
-        
-        stage ("Informacion Build") {
+        stage("Información Build"){
             print currentBuild.result
             print currentBuild.number
             print currentBuild.displayName
             print currentBuild.buildCauses
             print currentBuild.projectName
             print currentBuild.previousBuild
-
+            
             if(currentBuild.rawBuild.getCause(hudson.model.Cause$UserIdCause)!=null){
                 echo "Esto solo se ejecuta si la causa es un lanzamiento manual"
             }
@@ -52,6 +53,26 @@ node {
             if(currentBuild.rawBuild.getCause(hudson.triggers.SCMTrigger$SCMTriggerCause)!=null){
                 echo "Esto solo se ejecuta si la causa es un lanzamiento debido a cambio en el repo"
             }
+            
+            
+            // Pongais codigo que nos permite recuperar la informacion del último build que se ejecuto correctamente
+            def buildAnterior=currentBuild.previousBuild
+            while(buildAnterior != null){
+                if(buildAnterior.result=="SUCCESS"){
+                    print buildAnterior.number
+                    copyArtifacts(
+                        filter: "$FICHERO", 
+                        fingerprintArtifacts: true, 
+                        projectName: currentBuild.projectName, 
+                        selector: specific( "${buildAnterior.number}" )
+                    )
+                    break
+                }
+                buildAnterior=buildAnterior.previousBuild
+            }
+            
+            
+            
             
         }
         
